@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تحدي الخطوات - الأسبوع الأول</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0B0E17;
+  --bg-card: #141829;
+  --bg-card-hover: #1a1f38;
+  --gold: #F5B731;
+  --gold-dim: #C4922A;
+  --silver: #A8B4C4;
+  --bronze: #D4845A;
+  --accent-blue: #4A8FE7;
+  --accent-teal: #2DD4A8;
+  --accent-red: #F06060;
+  --accent-purple: #9B72F0;
+  --text-primary: #F0F0F5;
+  --text-secondary: #8A8EA8;
+  --text-muted: #585C78;
+  --border: rgba(255,255,255,0.06);
+  --glow-gold: rgba(245,183,49,0.15);
+  --glow-blue: rgba(74,143,231,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.bg-pattern {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 20% 10%, rgba(74,143,231,0.08), transparent),
+    radial-gradient(ellipse 500px 500px at 80% 80%, rgba(155,114,240,0.06), transparent),
+    radial-gradient(ellipse 400px 300px at 50% 50%, rgba(45,212,168,0.04), transparent);
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.week-chip {
+  display: inline-block;
+  padding: 6px 20px;
+  border-radius: 99px;
+  background: rgba(74,143,231,0.12);
+  border: 1px solid rgba(74,143,231,0.25);
+  color: var(--accent-blue);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  letter-spacing: 0.3px;
+}
+
+.header h1 {
+  font-size: 42px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #F0F0F5 0%, #A8B4C4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.header p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  font-weight: 300;
+}
+
+/* Stats Row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.stat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,0.12);
+}
+
+.stat-icon { font-size: 24px; margin-bottom: 8px; }
+.stat-num { font-size: 28px; font-weight: 800; color: var(--text-primary); }
+.stat-label { font-size: 13px; color: var(--text-secondary); margin-top: 4px; font-weight: 400; }
+
+/* Podium */
+.podium-section {
+  margin-bottom: 48px;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to left, transparent, var(--border));
+}
+
+.podium {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px 0 0;
+}
+
+.podium-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  padding: 24px 20px 0;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.podium-card:hover { transform: translateY(-4px); }
+
+.podium-card.first {
+  background: linear-gradient(180deg, rgba(245,183,49,0.1) 0%, var(--bg-card) 60%);
+  border: 1px solid rgba(245,183,49,0.2);
+  order: 2;
+}
+
+.podium-card.second {
+  background: linear-gradient(180deg, rgba(168,180,196,0.08) 0%, var(--bg-card) 60%);
+  border: 1px solid rgba(168,180,196,0.15);
+  order: 1;
+}
+
+.podium-card.third {
+  background: linear-gradient(180deg, rgba(212,132,90,0.08) 0%, var(--bg-card) 60%);
+  border: 1px solid rgba(212,132,90,0.15);
+  order: 3;
+}
+
+.podium-rank {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.first .podium-rank { background: var(--gold); color: #1a1200; }
+.second .podium-rank { background: var(--silver); color: #1a1a2e; }
+.third .podium-rank { background: var(--bronze); color: #1a1200; }
+
+.podium-emoji { font-size: 40px; margin-bottom: 8px; }
+.podium-name { font-size: 16px; font-weight: 700; text-align: center; max-width: 130px; }
+.podium-steps { font-size: 13px; color: var(--text-secondary); margin-top: 4px; font-weight: 400; }
+
+.podium-pts {
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.first .podium-pts { background: rgba(245,183,49,0.15); color: var(--gold); }
+.second .podium-pts { background: rgba(168,180,196,0.12); color: var(--silver); }
+.third .podium-pts { background: rgba(212,132,90,0.12); color: var(--bronze); }
+
+.podium-bar {
+  width: 100%;
+  border-radius: 12px 12px 0 0;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.first .podium-bar { height: 100px; background: linear-gradient(180deg, rgba(245,183,49,0.2), rgba(245,183,49,0.05)); }
+.second .podium-bar { height: 72px; background: linear-gradient(180deg, rgba(168,180,196,0.15), rgba(168,180,196,0.03)); }
+.third .podium-bar { height: 52px; background: linear-gradient(180deg, rgba(212,132,90,0.15), rgba(212,132,90,0.03)); }
+
+/* Leaderboard Table */
+.table-section {
+  margin-bottom: 48px;
+}
+
+.table-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 16px 14px;
+  text-align: right;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.2);
+}
+
+tbody tr {
+  transition: background 0.15s ease;
+}
+
+tbody tr:hover {
+  background: var(--bg-card-hover);
+}
+
+tbody td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+
+.rank-cell {
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+  width: 48px;
+  color: var(--text-secondary);
+}
+
+.rank-cell.top1 { color: var(--gold); }
+.rank-cell.top2 { color: var(--silver); }
+.rank-cell.top3 { color: var(--bronze); }
+
+.avatar-cell {
+  text-align: center;
+  font-size: 22px;
+  width: 44px;
+}
+
+.name-cell {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.bonus-badge {
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: rgba(45,212,168,0.12);
+  color: var(--accent-teal);
+  font-weight: 600;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.steps-cell {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.avg-cell {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.sparkline-container {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 22px;
+  margin-top: 4px;
+}
+
+.spark-bar {
+  width: 5px;
+  border-radius: 2px;
+  min-height: 2px;
+  background: var(--accent-blue);
+  opacity: 0.7;
+}
+
+.trend-cell {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.trend-up { color: var(--accent-teal); }
+.trend-down { color: var(--accent-red); }
+.trend-flat { color: var(--text-muted); }
+
+.pts-pill {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.pts-4 { background: rgba(245,183,49,0.15); color: var(--gold); }
+.pts-3 { background: rgba(168,180,196,0.12); color: var(--silver); }
+.pts-2 { background: rgba(212,132,90,0.12); color: var(--bronze); }
+.pts-1 { background: rgba(45,212,168,0.1); color: var(--accent-teal); }
+.pts-0 { background: rgba(255,255,255,0.04); color: var(--text-muted); }
+
+/* Awards */
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.award-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.award-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,0.1);
+}
+
+.award-icon {
+  font-size: 30px;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+}
+
+.award-title {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.award-name {
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.award-detail {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* Points Legend */
+.legend {
+  margin-top: 32px;
+  padding: 20px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+}
+
+.legend-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 48px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 300;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header h1 { font-size: 28px; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .awards-grid { grid-template-columns: 1fr; }
+  .podium { gap: 8px; }
+  .podium-card { padding: 16px 12px 0; }
+  .podium-name { font-size: 13px; max-width: 90px; }
+  table { font-size: 12px; }
+  thead th, tbody td { padding: 10px 8px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-pattern"></div>
+
+<div class="container">
+  <!-- Header -->
+  <div class="header animate">
+    <div class="week-chip">الأسبوع ١ • ٢٨ مارس – ٥ أبريل ٢٠٢٦</div>
+    <h1>🏆 لوحة تحدي الخطوات</h1>
+    <p>تابع ترتيبك وحقق أهدافك الأسبوعية</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row animate delay-1">
+    <div class="stat-box">
+      <div class="stat-icon">👥</div>
+      <div class="stat-num">٢٦</div>
+      <div class="stat-label">مشارك</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-icon">👟</div>
+      <div class="stat-num">١.٥٨M</div>
+      <div class="stat-label">إجمالي الخطوات</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-icon">⭐</div>
+      <div class="stat-num">٧</div>
+      <div class="stat-label">حققوا ٧٠ ألف+</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-icon">🔥</div>
+      <div class="stat-num">٢٢,١٤٩</div>
+      <div class="stat-label">أعلى خطوات يوم واحد</div>
+    </div>
+  </div>
+
+  <!-- Podium -->
+  <div class="podium-section animate delay-2">
+    <div class="section-title">🏅 المنصة</div>
+    <div class="podium">
+      <div class="podium-card second">
+        <div class="podium-rank">٢</div>
+        <div class="podium-emoji">🐆</div>
+        <div class="podium-name">هديل عبدالله</div>
+        <div class="podium-steps">١٠٨,٥٩٠ خطوة</div>
+        <div class="podium-pts">٣ نقاط</div>
+        <div class="podium-bar"></div>
+      </div>
+      <div class="podium-card first">
+        <div class="podium-rank">١</div>
+        <div class="podium-emoji">⚡</div>
+        <div class="podium-name">باسم خشرم</div>
+        <div class="podium-steps">١٥١,٩٣٧ خطوة</div>
+        <div class="podium-pts">٤ نقاط</div>
+        <div class="podium-bar"></div>
+      </div>
+      <div class="podium-card third">
+        <div class="podium-rank">٣</div>
+        <div class="podium-emoji">🐎</div>
+        <div class="podium-name">وصايف الخشرم</div>
+        <div class="podium-steps">١٠٢,٢٥٧ خطوة</div>
+        <div class="podium-pts">٢ نقطة</div>
+        <div class="podium-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Leaderboard -->
+  <div class="table-section animate delay-3">
+    <div class="section-title">📊 الترتيب الكامل</div>
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th></th>
+            <th>الاسم</th>
+            <th>إجمالي الخطوات</th>
+            <th>المعدل/يوم</th>
+            <th>الاتجاه</th>
+            <th>النقاط</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Awards -->
+  <div class="animate delay-4">
+    <div class="section-title">🎖️ جوائز الأسبوع</div>
+    <div class="awards-grid" id="awards"></div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend animate delay-5">
+    <div class="legend-title">نظام النقاط:</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--gold);"></div>المركز الأول = ٣ نقاط</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--silver);"></div>المركز الثاني = ٢ نقطة</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--bronze);"></div>المركز الثالث = ١ نقطة</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--accent-teal);"></div>+١ نقطة لمن حقق ٧٠,٠٠٠+ خطوة</div>
+  </div>
+
+  <!-- Avatar Legend -->
+  <div class="legend animate delay-5" style="margin-top:12px;">
+    <div class="legend-title">رموز المشاركين:</div>
+    <div class="legend-item">⚡ فلاش (١٥ألف+)</div>
+    <div class="legend-item">🐆 فهد (١٢ألف+)</div>
+    <div class="legend-item">🐎 حصان (١٠ألف+)</div>
+    <div class="legend-item">🐕 كلب (٨ألف+)</div>
+    <div class="legend-item">🐇 أرنب (٦ألف+)</div>
+    <div class="legend-item">🐈 قطة (٤ألف+)</div>
+    <div class="legend-item">🦔 قنفذ (٣ألف+)</div>
+    <div class="legend-item">🐌 حلزون (٢ألف+)</div>
+    <div class="legend-item">🐢 سلحفاة (أقل)</div>
+  </div>
+
+  <div class="footer">
+    تحدي الخطوات ٢٠٢٦ • ٦ أسابيع من التحدي والإنجاز
+  </div>
+</div>
+
+<script>
+const data = [
+  {r:1,name:"باسم خشرم",total:151937,avg:16882,trend:-14.4,pts:4,bonus:true,daily:[20683,21988,11381,22149,15363,14085,15087,16777,14424]},
+  {r:2,name:"هديل عبدالله",total:108590,avg:12066,trend:-6.6,pts:3,bonus:true,daily:[11040,19095,14309,6253,12010,4382,13202,14290,14009]},
+  {r:3,name:"وصايف الخشرم",total:102257,avg:11362,trend:10.6,pts:2,bonus:true,daily:[11470,11940,10278,10878,10197,10240,12442,9702,15110]},
+  {r:4,name:"بروك النزهان",total:100535,avg:11171,trend:-1.4,pts:1,bonus:true,daily:[7690,12957,12852,9719,14997,9274,14883,4493,13670]},
+  {r:5,name:"لينا خشرم",total:91335,avg:10148,trend:42.1,pts:1,bonus:true,daily:[4966,5371,11404,12482,14086,12140,4882,13110,12894]},
+  {r:6,name:"عبدالعزيز الخميس",total:88198,avg:9800,trend:-49.9,pts:1,bonus:true,daily:[9157,15985,10011,21254,6393,7776,5237,2651,9734]},
+  {r:7,name:"لولو المبارك",total:80964,avg:8996,trend:-24.6,pts:1,bonus:true,daily:[17770,16077,3751,3451,6052,5521,14184,8930,5228]},
+  {r:8,name:"حنان المبارك",total:67870,avg:7541,trend:-13.8,pts:0,bonus:false,daily:[6918,8762,8526,8767,7803,6234,9328,3419,8113]},
+  {r:9,name:"عبدالإله",total:59982,avg:6665,trend:-44.0,pts:0,bonus:false,daily:[4053,12569,9872,5588,7130,5940,3318,3525,7987]},
+  {r:10,name:"غلا",total:59248,avg:6583,trend:-55.7,pts:0,bonus:false,daily:[20821,6544,6083,4181,4169,2644,3535,6521,4750]},
+  {r:11,name:"المهاء المبارك",total:57375,avg:6375,trend:-41.7,pts:0,bonus:false,daily:[6850,10062,8513,5170,8198,3749,2275,4735,7823]},
+  {r:12,name:"متعب سعد",total:52365,avg:5818,trend:30.5,pts:0,bonus:false,daily:[5710,5408,4997,5142,5659,4424,7675,8261,5089]},
+  {r:13,name:"وضحاء المبارك",total:44133,avg:4904,trend:42.1,pts:0,bonus:false,daily:[4231,3238,4993,6221,6060,1686,5970,3614,8120]},
+  {r:14,name:"سلاف ماهر",total:43366,avg:4818,trend:28.3,pts:0,bonus:false,daily:[1267,5082,5734,6691,3011,6078,10806,3419,1278]},
+  {r:15,name:"فوزية الكاميس",total:40920,avg:4547,trend:-14.6,pts:0,bonus:false,daily:[6412,6581,4343,1268,4507,3009,5204,4117,5479]},
+  {r:16,name:"وفاء حسن",total:39411,avg:4379,trend:-31.1,pts:0,bonus:false,daily:[6509,5604,5472,6796,1626,1281,5983,3400,2740]},
+  {r:17,name:"منال م.ع",total:33793,avg:3755,trend:-87.7,pts:0,bonus:false,daily:[3654,7249,5807,3981,4933,6107,835,435,792]},
+  {r:18,name:"عزيزة حسين",total:33185,avg:3687,trend:-44.5,pts:0,bonus:false,daily:[2965,4070,7411,4299,3825,2598,697,5645,1675]},
+  {r:19,name:"نورة المبارك",total:32704,avg:3634,trend:-57.6,pts:0,bonus:false,daily:[15119,3536,725,1014,2555,1535,924,5217,2079]},
+  {r:20,name:"نايف",total:32325,avg:3592,trend:-85.7,pts:0,bonus:false,daily:[4708,12927,6728,2102,1905,468,157,1268,2062]},
+  {r:21,name:"أنوار فهد",total:31121,avg:3458,trend:-9.0,pts:0,bonus:false,daily:[318,5206,4216,5486,4261,2768,4324,2888,1654]},
+  {r:22,name:"أحمد الخميس",total:28098,avg:3122,trend:-74.4,pts:0,bonus:false,daily:[3089,3286,10115,1794,1151,4440,2865,1358,0]},
+  {r:23,name:"نورة الثنيان",total:24626,avg:2736,trend:141.3,pts:0,bonus:false,daily:[306,629,4052,3862,717,3024,7632,2911,1493]},
+  {r:24,name:"قماشة",total:21691,avg:2410,trend:41.4,pts:0,bonus:false,daily:[494,1214,3824,2485,3306,2547,3031,2393,2397]},
+  {r:25,name:"أنوود",total:15594,avg:1733,trend:55.8,pts:0,bonus:false,daily:[708,1101,1764,2872,1978,1605,508,2156,2902]},
+  {r:26,name:"وضحاء خميس",total:14555,avg:1617,trend:14.1,pts:0,bonus:false,daily:[1399,3178,949,594,1589,542,1534,1359,3411]}
+];
+
+function getAvatar(avg) {
+  if (avg >= 15000) return "⚡";
+  if (avg >= 12000) return "🐆";
+  if (avg >= 10000) return "🐎";
+  if (avg >= 8000) return "🐕";
+  if (avg >= 6000) return "🐇";
+  if (avg >= 4000) return "🐈";
+  if (avg >= 3000) return "🦔";
+  if (avg >= 2000) return "🐌";
+  return "🐢";
+}
+
+function toArabicNum(n) {
+  return n.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+}
+
+const maxTotal = data[0].total;
+const tbody = document.getElementById("tbody");
+
+data.forEach(p => {
+  const emoji = getAvatar(p.avg);
+  const maxD = Math.max(...p.daily);
+  const sparkHtml = p.daily.map(d => {
+    const h = Math.max(2, Math.round((d / maxD) * 22));
+    return `<div class="spark-bar" style="height:${h}px;"></div>`;
+  }).join("");
+
+  const trendIcon = p.trend > 10 ? "▲" : p.trend < -10 ? "▼" : "◆";
+  const trendClass = p.trend > 10 ? "trend-up" : p.trend < -10 ? "trend-down" : "trend-flat";
+  const rankClass = p.r <= 3 ? `top${p.r}` : "";
+
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td class="rank-cell ${rankClass}">${toArabicNum(p.r)}</td>
+    <td class="avatar-cell">${emoji}</td>
+    <td class="name-cell">${p.name}${p.bonus ? '<span class="bonus-badge">٧٠ألف+</span>' : ''}</td>
+    <td class="steps-cell">${toArabicNum(p.total.toLocaleString())}</td>
+    <td class="avg-cell">${toArabicNum(p.avg.toLocaleString())}/يوم<br><div class="sparkline-container">${sparkHtml}</div></td>
+    <td class="trend-cell ${trendClass}">${trendIcon} ${toArabicNum(Math.abs(p.trend).toFixed(1))}%</td>
+    <td><span class="pts-pill pts-${Math.min(p.pts, 4)}">${toArabicNum(p.pts)}</span></td>
+  `;
+  tbody.appendChild(row);
+});
+
+const awards = [
+  {icon:"🔥",title:"أكثر خطوات في يوم",name:"باسم خشرم",detail:"٢٢,١٤٩ خطوة في ٣١ مارس"},
+  {icon:"🚀",title:"صاعد محتمل",name:"نورة الثنيان",detail:"ارتفاع ١٤١٪ في المعدل"},
+  {icon:"🎯",title:"الأكثر ثباتاً",name:"وصايف الخشرم",detail:"أقل تذبذب يومي"},
+  {icon:"💪",title:"محطم الأهداف",name:"لينا خشرم",detail:"٢٠٣٪ من هدفها اليومي"},
+  {icon:"🌟",title:"محارب نهاية الأسبوع",name:"غلا",detail:"٢٠,٨٢١ خطوة في أول يوم"},
+  {icon:"📈",title:"متألق متأخر",name:"وضحاء المبارك",detail:"أفضل يوم كان آخر يوم"}
+];
+
+const awardsEl = document.getElementById("awards");
+awards.forEach(a => {
+  const card = document.createElement("div");
+  card.className = "award-card";
+  card.innerHTML = `
+    <div class="award-icon">${a.icon}</div>
+    <div>
+      <div class="award-title">${a.title}</div>
+      <div class="award-name">${a.name}</div>
+      <div class="award-detail">${a.detail}</div>
+    </div>
+  `;
+  awardsEl.appendChild(card);
+});
+</script>
+
+</body>
+</html>
