@@ -3,702 +3,105 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تحدي الخطوات - الأسبوع الأول</title>
+<title>تحدي الخطوات - الأسبوع ٢</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg-deep: #0B0E17;
-  --bg-card: #141829;
-  --bg-card-hover: #1a1f38;
-  --gold: #F5B731;
-  --gold-dim: #C4922A;
-  --silver: #A8B4C4;
-  --bronze: #D4845A;
-  --accent-blue: #4A8FE7;
-  --accent-teal: #2DD4A8;
-  --accent-red: #F06060;
-  --accent-purple: #9B72F0;
-  --text-primary: #F0F0F5;
-  --text-secondary: #8A8EA8;
-  --text-muted: #585C78;
-  --border: rgba(255,255,255,0.06);
-  --glow-gold: rgba(245,183,49,0.15);
-  --glow-blue: rgba(74,143,231,0.12);
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'Tajawal', sans-serif;
-  background: var(--bg-deep);
-  color: var(--text-primary);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-.bg-pattern {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background:
-    radial-gradient(ellipse 600px 400px at 20% 10%, rgba(74,143,231,0.08), transparent),
-    radial-gradient(ellipse 500px 500px at 80% 80%, rgba(155,114,240,0.06), transparent),
-    radial-gradient(ellipse 400px 300px at 50% 50%, rgba(45,212,168,0.04), transparent);
-  pointer-events: none;
-}
-
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 40px 24px 80px;
-}
-
-/* Header */
-.header {
-  text-align: center;
-  margin-bottom: 48px;
-}
-
-.week-chip {
-  display: inline-block;
-  padding: 6px 20px;
-  border-radius: 99px;
-  background: rgba(74,143,231,0.12);
-  border: 1px solid rgba(74,143,231,0.25);
-  color: var(--accent-blue);
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 16px;
-  letter-spacing: 0.3px;
-}
-
-.header h1 {
-  font-size: 42px;
-  font-weight: 900;
-  background: linear-gradient(135deg, #F0F0F5 0%, #A8B4C4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 8px;
-  line-height: 1.3;
-}
-
-.header p {
-  color: var(--text-secondary);
-  font-size: 16px;
-  font-weight: 300;
-}
-
-/* Stats Row */
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 40px;
-}
-
-.stat-box {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 20px;
-  text-align: center;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.stat-box:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255,255,255,0.12);
-}
-
-.stat-icon { font-size: 24px; margin-bottom: 8px; }
-.stat-num { font-size: 28px; font-weight: 800; color: var(--text-primary); }
-.stat-label { font-size: 13px; color: var(--text-secondary); margin-top: 4px; font-weight: 400; }
-
-/* Podium */
-.podium-section {
-  margin-bottom: 48px;
-}
-
-.section-title {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.section-title::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to left, transparent, var(--border));
-}
-
-.podium {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 16px;
-  padding: 20px 0 0;
-}
-
-.podium-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 20px;
-  padding: 24px 20px 0;
-  position: relative;
-  transition: transform 0.3s ease;
-}
-
-.podium-card:hover { transform: translateY(-4px); }
-
-.podium-card.first {
-  background: linear-gradient(180deg, rgba(245,183,49,0.1) 0%, var(--bg-card) 60%);
-  border: 1px solid rgba(245,183,49,0.2);
-  order: 2;
-}
-
-.podium-card.second {
-  background: linear-gradient(180deg, rgba(168,180,196,0.08) 0%, var(--bg-card) 60%);
-  border: 1px solid rgba(168,180,196,0.15);
-  order: 1;
-}
-
-.podium-card.third {
-  background: linear-gradient(180deg, rgba(212,132,90,0.08) 0%, var(--bg-card) 60%);
-  border: 1px solid rgba(212,132,90,0.15);
-  order: 3;
-}
-
-.podium-rank {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 16px;
-  margin-bottom: 12px;
-}
-
-.first .podium-rank { background: var(--gold); color: #1a1200; }
-.second .podium-rank { background: var(--silver); color: #1a1a2e; }
-.third .podium-rank { background: var(--bronze); color: #1a1200; }
-
-.podium-emoji { font-size: 40px; margin-bottom: 8px; }
-.podium-name { font-size: 16px; font-weight: 700; text-align: center; max-width: 130px; }
-.podium-steps { font-size: 13px; color: var(--text-secondary); margin-top: 4px; font-weight: 400; }
-
-.podium-pts {
-  display: inline-block;
-  padding: 4px 16px;
-  border-radius: 99px;
-  font-size: 13px;
-  font-weight: 700;
-  margin-top: 10px;
-}
-
-.first .podium-pts { background: rgba(245,183,49,0.15); color: var(--gold); }
-.second .podium-pts { background: rgba(168,180,196,0.12); color: var(--silver); }
-.third .podium-pts { background: rgba(212,132,90,0.12); color: var(--bronze); }
-
-.podium-bar {
-  width: 100%;
-  border-radius: 12px 12px 0 0;
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.first .podium-bar { height: 100px; background: linear-gradient(180deg, rgba(245,183,49,0.2), rgba(245,183,49,0.05)); }
-.second .podium-bar { height: 72px; background: linear-gradient(180deg, rgba(168,180,196,0.15), rgba(168,180,196,0.03)); }
-.third .podium-bar { height: 52px; background: linear-gradient(180deg, rgba(212,132,90,0.15), rgba(212,132,90,0.03)); }
-
-/* Leaderboard Table */
-.table-section {
-  margin-bottom: 48px;
-}
-
-.table-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-thead th {
-  font-size: 12px;
-  color: var(--text-muted);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 16px 14px;
-  text-align: right;
-  border-bottom: 1px solid var(--border);
-  background: rgba(0,0,0,0.2);
-}
-
-tbody tr {
-  transition: background 0.15s ease;
-}
-
-tbody tr:hover {
-  background: var(--bg-card-hover);
-}
-
-tbody td {
-  padding: 14px;
-  border-bottom: 1px solid var(--border);
-  font-size: 14px;
-  vertical-align: middle;
-}
-
-tbody tr:last-child td { border-bottom: none; }
-
-.rank-cell {
-  text-align: center;
-  font-weight: 700;
-  font-size: 15px;
-  width: 48px;
-  color: var(--text-secondary);
-}
-
-.rank-cell.top1 { color: var(--gold); }
-.rank-cell.top2 { color: var(--silver); }
-.rank-cell.top3 { color: var(--bronze); }
-
-.avatar-cell {
-  text-align: center;
-  font-size: 22px;
-  width: 44px;
-}
-
-.name-cell {
-  font-weight: 600;
-  font-size: 15px;
-}
-
-.bonus-badge {
-  display: inline-block;
-  font-size: 10px;
-  padding: 2px 8px;
-  border-radius: 99px;
-  background: rgba(45,212,168,0.12);
-  color: var(--accent-teal);
-  font-weight: 600;
-  margin-right: 6px;
-  vertical-align: middle;
-}
-
-.steps-cell {
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-
-.avg-cell {
-  color: var(--text-secondary);
-  font-size: 13px;
-  font-variant-numeric: tabular-nums;
-}
-
-.sparkline-container {
-  display: inline-flex;
-  align-items: flex-end;
-  gap: 2px;
-  height: 22px;
-  margin-top: 4px;
-}
-
-.spark-bar {
-  width: 5px;
-  border-radius: 2px;
-  min-height: 2px;
-  background: var(--accent-blue);
-  opacity: 0.7;
-}
-
-.trend-cell {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.trend-up { color: var(--accent-teal); }
-.trend-down { color: var(--accent-red); }
-.trend-flat { color: var(--text-muted); }
-
-.pts-pill {
-  display: inline-block;
-  padding: 4px 14px;
-  border-radius: 99px;
-  font-weight: 700;
-  font-size: 13px;
-}
-
-.pts-4 { background: rgba(245,183,49,0.15); color: var(--gold); }
-.pts-3 { background: rgba(168,180,196,0.12); color: var(--silver); }
-.pts-2 { background: rgba(212,132,90,0.12); color: var(--bronze); }
-.pts-1 { background: rgba(45,212,168,0.1); color: var(--accent-teal); }
-.pts-0 { background: rgba(255,255,255,0.04); color: var(--text-muted); }
-
-/* Awards */
-.awards-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.award-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 20px;
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.award-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255,255,255,0.1);
-}
-
-.award-icon {
-  font-size: 30px;
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.04);
-}
-
-.award-title {
-  font-size: 11px;
-  color: var(--text-muted);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-}
-
-.award-name {
-  font-size: 15px;
-  font-weight: 700;
-  margin-top: 4px;
-}
-
-.award-detail {
-  font-size: 12px;
-  color: var(--text-secondary);
-  margin-top: 2px;
-}
-
-/* Points Legend */
-.legend {
-  margin-top: 32px;
-  padding: 20px 24px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  align-items: center;
-}
-
-.legend-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-secondary);
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-.legend-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
-}
-
-/* Footer */
-.footer {
-  text-align: center;
-  margin-top: 48px;
-  color: var(--text-muted);
-  font-size: 13px;
-  font-weight: 300;
-}
-
-/* Animations */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate {
-  animation: fadeInUp 0.6s ease forwards;
-  opacity: 0;
-}
-
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.4s; }
-.delay-5 { animation-delay: 0.5s; }
-
-/* Responsive */
-@media (max-width: 768px) {
-  .header h1 { font-size: 28px; }
-  .stats-row { grid-template-columns: repeat(2, 1fr); }
-  .awards-grid { grid-template-columns: 1fr; }
-  .podium { gap: 8px; }
-  .podium-card { padding: 16px 12px 0; }
-  .podium-name { font-size: 13px; max-width: 90px; }
-  table { font-size: 12px; }
-  thead th, tbody td { padding: 10px 8px; }
-}
+:root{--bg:#0B0E17;--card:#141829;--card-h:#1a1f38;--gold:#F5B731;--silver:#A8B4C4;--bronze:#D4845A;--blue:#4A8FE7;--teal:#2DD4A8;--red:#F06060;--t1:#F0F0F5;--t2:#8A8EA8;--t3:#585C78;--brd:rgba(255,255,255,0.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh}
+.bg{position:fixed;inset:0;z-index:0;background:radial-gradient(600px 400px at 20% 10%,rgba(74,143,231,0.08),transparent),radial-gradient(500px at 80% 80%,rgba(155,114,240,0.06),transparent);pointer-events:none}
+.c{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:40px 24px 80px}
+.header{text-align:center;margin-bottom:40px}
+.wk-tabs{display:flex;justify-content:center;gap:8px;margin-bottom:16px}
+.wk-tab{padding:6px 20px;border-radius:99px;font-size:13px;font-weight:500;border:1px solid var(--brd);color:var(--t3);background:transparent}
+.wk-tab.active{background:rgba(74,143,231,0.12);border-color:rgba(74,143,231,0.3);color:var(--blue)}
+.header h1{font-size:42px;font-weight:900;background:linear-gradient(135deg,#F0F0F5,#A8B4C4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.header p{color:var(--t2);font-size:16px}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:36px}
+.stat{background:var(--card);border:1px solid var(--brd);border-radius:16px;padding:18px;text-align:center}
+.stat-i{font-size:22px}.stat-n{font-size:26px;font-weight:800}.stat-l{font-size:12px;color:var(--t2);margin-top:2px}
+.sec-t{font-size:20px;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.sec-t::after{content:'';flex:1;height:1px;background:linear-gradient(to left,transparent,var(--brd))}
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:16px;margin-bottom:40px;padding-top:16px}
+.pod{display:flex;flex-direction:column;align-items:center;border-radius:20px;padding:22px 18px 0;transition:.3s}
+.pod:hover{transform:translateY(-4px)}
+.pod.p1{background:linear-gradient(180deg,rgba(245,183,49,0.1),var(--card) 60%);border:1.5px solid rgba(245,183,49,0.2);order:2}
+.pod.p2{background:linear-gradient(180deg,rgba(168,180,196,0.08),var(--card) 60%);border:1.5px solid rgba(168,180,196,0.15);order:1}
+.pod.p3{background:linear-gradient(180deg,rgba(212,132,90,0.08),var(--card) 60%);border:1.5px solid rgba(212,132,90,0.15);order:3}
+.pod-r{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;margin-bottom:10px}
+.p1 .pod-r{background:var(--gold);color:#1a1200}.p2 .pod-r{background:var(--silver);color:#1a1a2e}.p3 .pod-r{background:var(--bronze);color:#1a1200}
+.pod-e{font-size:38px;margin-bottom:6px}.pod-nm{font-size:16px;font-weight:700;text-align:center;max-width:130px}
+.pod-st{font-size:12px;color:var(--t2);margin-top:3px}
+.pod-pt{display:inline-block;padding:3px 14px;border-radius:99px;font-size:12px;font-weight:700;margin-top:8px}
+.p1 .pod-pt{background:rgba(245,183,49,0.15);color:var(--gold)}.p2 .pod-pt{background:rgba(168,180,196,0.12);color:var(--silver)}.p3 .pod-pt{background:rgba(212,132,90,0.12);color:var(--bronze)}
+.pod-bar{width:100%;border-radius:12px 12px 0 0;margin-top:14px}
+.p1 .pod-bar{height:90px;background:linear-gradient(180deg,rgba(245,183,49,0.18),transparent)}.p2 .pod-bar{height:65px;background:linear-gradient(180deg,rgba(168,180,196,0.12),transparent)}.p3 .pod-bar{height:45px;background:linear-gradient(180deg,rgba(212,132,90,0.12),transparent)}
+.pod-ch{font-size:11px;margin-top:4px;font-weight:600}
+.chu{color:var(--teal)}.chd{color:var(--red)}
+.tbl-card{background:var(--card);border:1px solid var(--brd);border-radius:20px;overflow:hidden;margin-bottom:40px}
+table{width:100%;border-collapse:collapse}
+thead th{font-size:11px;color:var(--t3);font-weight:500;padding:14px 10px;text-align:right;border-bottom:1px solid var(--brd);background:rgba(0,0,0,0.2)}
+tbody tr:hover{background:var(--card-h)}
+tbody td{padding:11px 10px;border-bottom:1px solid var(--brd);font-size:13px;vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+.rk{text-align:center;font-weight:700;font-size:14px;width:40px;color:var(--t2)}.rk.t1{color:var(--gold)}.rk.t2{color:var(--silver)}.rk.t3{color:var(--bronze)}
+.av{text-align:center;font-size:20px;width:36px}
+.nm{font-weight:600}
+.bn{display:inline-block;font-size:9px;padding:2px 7px;border-radius:99px;background:rgba(45,212,168,0.12);color:var(--teal);font-weight:600;margin-right:5px;vertical-align:middle}
+.pts-p{display:inline-block;padding:3px 12px;border-radius:99px;font-weight:700;font-size:12px}
+.pg{background:rgba(245,183,49,0.15);color:var(--gold)}.ps{background:rgba(168,180,196,0.12);color:var(--silver)}.pb{background:rgba(212,132,90,0.12);color:var(--bronze)}.pt{background:rgba(45,212,168,0.1);color:var(--teal)}.pz{background:rgba(255,255,255,0.04);color:var(--t3)}
+.spk{display:inline-flex;align-items:flex-end;gap:1.5px;height:18px;vertical-align:middle}
+.spk-b{width:4px;border-radius:1.5px;min-height:2px;background:var(--blue);opacity:.7}
+.tu{color:var(--teal);font-weight:600}.td{color:var(--red);font-weight:600}.tf{color:var(--t3)}
+.awg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:36px}
+.aw{background:var(--card);border:1px solid var(--brd);border-radius:14px;padding:16px;display:flex;align-items:center;gap:12px;transition:.2s}
+.aw:hover{transform:translateY(-2px)}
+.aw-i{font-size:26px;flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:rgba(255,255,255,0.04)}
+.aw-t{font-size:10px;color:var(--t3);font-weight:500}.aw-n{font-size:14px;font-weight:700;margin-top:2px}.aw-d{font-size:11px;color:var(--t2);margin-top:1px}
+.legend{margin-top:12px;padding:16px 20px;background:var(--card);border:1px solid var(--brd);border-radius:14px;display:flex;flex-wrap:wrap;gap:18px;font-size:12px;color:var(--t2)}
+.legend b{color:var(--t1)}
+.footer{text-align:center;margin-top:36px;color:var(--t3);font-size:13px}
+@media(max-width:768px){.header h1{font-size:28px}.stats-row{grid-template-columns:repeat(2,1fr)}.awg{grid-template-columns:1fr}.podium{gap:8px}}
 </style>
 </head>
 <body>
-
-<div class="bg-pattern"></div>
-
-<div class="container">
-  <!-- Header -->
-  <div class="header animate">
-    <div class="week-chip">الأسبوع ١ • ٢٨ مارس – ٥ أبريل ٢٠٢٦</div>
-    <h1>🏆 لوحة تحدي الخطوات</h1>
-    <p>تابع ترتيبك وحقق أهدافك الأسبوعية</p>
-  </div>
-
-  <!-- Stats -->
-  <div class="stats-row animate delay-1">
-    <div class="stat-box">
-      <div class="stat-icon">👥</div>
-      <div class="stat-num">٢٦</div>
-      <div class="stat-label">مشارك</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-icon">👟</div>
-      <div class="stat-num">١.٥٨M</div>
-      <div class="stat-label">إجمالي الخطوات</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-icon">⭐</div>
-      <div class="stat-num">٧</div>
-      <div class="stat-label">حققوا ٧٠ ألف+</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-icon">🔥</div>
-      <div class="stat-num">٢٢,١٤٩</div>
-      <div class="stat-label">أعلى خطوات يوم واحد</div>
-    </div>
-  </div>
-
-  <!-- Podium -->
-  <div class="podium-section animate delay-2">
-    <div class="section-title">🏅 المنصة</div>
-    <div class="podium">
-      <div class="podium-card second">
-        <div class="podium-rank">٢</div>
-        <div class="podium-emoji">🐆</div>
-        <div class="podium-name">هديل عبدالله</div>
-        <div class="podium-steps">١٠٨,٥٩٠ خطوة</div>
-        <div class="podium-pts">٣ نقاط</div>
-        <div class="podium-bar"></div>
-      </div>
-      <div class="podium-card first">
-        <div class="podium-rank">١</div>
-        <div class="podium-emoji">⚡</div>
-        <div class="podium-name">باسم خشرم</div>
-        <div class="podium-steps">١٥١,٩٣٧ خطوة</div>
-        <div class="podium-pts">٤ نقاط</div>
-        <div class="podium-bar"></div>
-      </div>
-      <div class="podium-card third">
-        <div class="podium-rank">٣</div>
-        <div class="podium-emoji">🐎</div>
-        <div class="podium-name">وصايف الخشرم</div>
-        <div class="podium-steps">١٠٢,٢٥٧ خطوة</div>
-        <div class="podium-pts">٢ نقطة</div>
-        <div class="podium-bar"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Full Leaderboard -->
-  <div class="table-section animate delay-3">
-    <div class="section-title">📊 الترتيب الكامل</div>
-    <div class="table-card">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th></th>
-            <th>الاسم</th>
-            <th>إجمالي الخطوات</th>
-            <th>المعدل/يوم</th>
-            <th>الاتجاه</th>
-            <th>النقاط</th>
-          </tr>
-        </thead>
-        <tbody id="tbody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Awards -->
-  <div class="animate delay-4">
-    <div class="section-title">🎖️ جوائز الأسبوع</div>
-    <div class="awards-grid" id="awards"></div>
-  </div>
-
-  <!-- Legend -->
-  <div class="legend animate delay-5">
-    <div class="legend-title">نظام النقاط:</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--gold);"></div>المركز الأول = ٣ نقاط</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--silver);"></div>المركز الثاني = ٢ نقطة</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--bronze);"></div>المركز الثالث = ١ نقطة</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--accent-teal);"></div>+١ نقطة لمن حقق ٧٠,٠٠٠+ خطوة</div>
-  </div>
-
-  <!-- Avatar Legend -->
-  <div class="legend animate delay-5" style="margin-top:12px;">
-    <div class="legend-title">رموز المشاركين:</div>
-    <div class="legend-item">⚡ فلاش (١٥ألف+)</div>
-    <div class="legend-item">🐆 فهد (١٢ألف+)</div>
-    <div class="legend-item">🐎 حصان (١٠ألف+)</div>
-    <div class="legend-item">🐕 كلب (٨ألف+)</div>
-    <div class="legend-item">🐇 أرنب (٦ألف+)</div>
-    <div class="legend-item">🐈 قطة (٤ألف+)</div>
-    <div class="legend-item">🦔 قنفذ (٣ألف+)</div>
-    <div class="legend-item">🐌 حلزون (٢ألف+)</div>
-    <div class="legend-item">🐢 سلحفاة (أقل)</div>
-  </div>
-
-  <div class="footer">
-    تحدي الخطوات ٢٠٢٦ • ٦ أسابيع من التحدي والإنجاز
-  </div>
+<div class="bg"></div>
+<div class="c">
+<div class="header">
+<div class="wk-tabs"><span class="wk-tab">الأسبوع ١</span><span class="wk-tab active">الأسبوع ٢</span><span class="wk-tab">٣</span><span class="wk-tab">٤</span><span class="wk-tab">٥</span><span class="wk-tab">٦</span></div>
+<h1>🏆 لوحة تحدي الخطوات</h1>
+<p>الترتيب التراكمي بعد أسبوعين</p>
 </div>
-
+<div class="stats-row">
+<div class="stat"><div class="stat-i">👥</div><div class="stat-n">٢٧</div><div class="stat-l">مشارك</div></div>
+<div class="stat"><div class="stat-i">👟</div><div class="stat-n">٢.٥٧M</div><div class="stat-l">إجمالي الخطوات</div></div>
+<div class="stat"><div class="stat-i">⭐</div><div class="stat-n">٣</div><div class="stat-l">حققوا ٧٠ألف+ هذا الأسبوع</div></div>
+<div class="stat"><div class="stat-i">🔥</div><div class="stat-n">٢١,٢٨٠</div><div class="stat-l">أعلى خطوات يوم واحد</div></div>
+</div>
+<div class="sec-t">🏅 منصة الأسبوع ٢</div>
+<div class="podium">
+<div class="pod p2"><div class="pod-r">٢</div><div class="pod-e">⚡</div><div class="pod-nm">باسم خشرم</div><div class="pod-st">٧٨,٥١٦ خطوة</div><div class="pod-pt">٣ نقاط</div><div class="pod-ch chd">▼ ١</div><div class="pod-bar"></div></div>
+<div class="pod p1"><div class="pod-r">١</div><div class="pod-e">🐎</div><div class="pod-nm">وصايف الخشرم</div><div class="pod-st">٨٠,٥٥٠ خطوة</div><div class="pod-pt">٤ نقاط</div><div class="pod-ch chu">▲ ٢</div><div class="pod-bar"></div></div>
+<div class="pod p3"><div class="pod-r">٣</div><div class="pod-e">🐎</div><div class="pod-nm">بروك النزهان</div><div class="pod-st">٧٣,٠٥٢ خطوة</div><div class="pod-pt">٢ نقطة</div><div class="pod-ch chu">▲ ١</div><div class="pod-bar"></div></div>
+</div>
+<div class="sec-t">🎖️ جوائز الأسبوع ٢</div>
+<div class="awg" id="awards"></div>
+<div class="sec-t">📊 الترتيب التراكمي</div>
+<div class="tbl-card"><table><thead><tr><th>#</th><th></th><th>الاسم</th><th>أسبوع ١</th><th>أسبوع ٢</th><th>المجموع</th><th>الاتجاه</th><th>النقاط</th></tr></thead><tbody id="tbody"></tbody></table></div>
+<div class="legend"><b>النقاط:</b><span>🥇 الأول = ٣</span><span>🥈 الثاني = ٢</span><span>🥉 الثالث = ١</span><span>⭐ +١ لمن حقق ٧٠ألف+</span></div>
+<div class="legend" style="margin-top:8px"><b>الرموز:</b><span>⚡ فلاش</span><span>🐆 فهد</span><span>🐎 حصان</span><span>🐕 كلب</span><span>🐇 أرنب</span><span>🐈 قطة</span><span>🦔 قنفذ</span><span>🐌 حلزون</span><span>🐢 سلحفاة</span></div>
+<div class="footer">تحدي الخطوات ٢٠٢٦ • الأسبوع ٢ من ٦</div>
+</div>
 <script>
-const data = [
-  {r:1,name:"باسم خشرم",total:151937,avg:16882,trend:-14.4,pts:4,bonus:true,daily:[20683,21988,11381,22149,15363,14085,15087,16777,14424]},
-  {r:2,name:"هديل عبدالله",total:108590,avg:12066,trend:-6.6,pts:3,bonus:true,daily:[11040,19095,14309,6253,12010,4382,13202,14290,14009]},
-  {r:3,name:"وصايف الخشرم",total:102257,avg:11362,trend:10.6,pts:2,bonus:true,daily:[11470,11940,10278,10878,10197,10240,12442,9702,15110]},
-  {r:4,name:"بروك النزهان",total:100535,avg:11171,trend:-1.4,pts:1,bonus:true,daily:[7690,12957,12852,9719,14997,9274,14883,4493,13670]},
-  {r:5,name:"لينا خشرم",total:91335,avg:10148,trend:42.1,pts:1,bonus:true,daily:[4966,5371,11404,12482,14086,12140,4882,13110,12894]},
-  {r:6,name:"عبدالعزيز الخميس",total:88198,avg:9800,trend:-49.9,pts:1,bonus:true,daily:[9157,15985,10011,21254,6393,7776,5237,2651,9734]},
-  {r:7,name:"لولو المبارك",total:80964,avg:8996,trend:-24.6,pts:1,bonus:true,daily:[17770,16077,3751,3451,6052,5521,14184,8930,5228]},
-  {r:8,name:"حنان المبارك",total:67870,avg:7541,trend:-13.8,pts:0,bonus:false,daily:[6918,8762,8526,8767,7803,6234,9328,3419,8113]},
-  {r:9,name:"عبدالإله",total:59982,avg:6665,trend:-44.0,pts:0,bonus:false,daily:[4053,12569,9872,5588,7130,5940,3318,3525,7987]},
-  {r:10,name:"غلا",total:59248,avg:6583,trend:-55.7,pts:0,bonus:false,daily:[20821,6544,6083,4181,4169,2644,3535,6521,4750]},
-  {r:11,name:"المهاء المبارك",total:57375,avg:6375,trend:-41.7,pts:0,bonus:false,daily:[6850,10062,8513,5170,8198,3749,2275,4735,7823]},
-  {r:12,name:"متعب سعد",total:52365,avg:5818,trend:30.5,pts:0,bonus:false,daily:[5710,5408,4997,5142,5659,4424,7675,8261,5089]},
-  {r:13,name:"وضحاء المبارك",total:44133,avg:4904,trend:42.1,pts:0,bonus:false,daily:[4231,3238,4993,6221,6060,1686,5970,3614,8120]},
-  {r:14,name:"سلاف ماهر",total:43366,avg:4818,trend:28.3,pts:0,bonus:false,daily:[1267,5082,5734,6691,3011,6078,10806,3419,1278]},
-  {r:15,name:"فوزية الكاميس",total:40920,avg:4547,trend:-14.6,pts:0,bonus:false,daily:[6412,6581,4343,1268,4507,3009,5204,4117,5479]},
-  {r:16,name:"وفاء حسن",total:39411,avg:4379,trend:-31.1,pts:0,bonus:false,daily:[6509,5604,5472,6796,1626,1281,5983,3400,2740]},
-  {r:17,name:"منال م.ع",total:33793,avg:3755,trend:-87.7,pts:0,bonus:false,daily:[3654,7249,5807,3981,4933,6107,835,435,792]},
-  {r:18,name:"عزيزة حسين",total:33185,avg:3687,trend:-44.5,pts:0,bonus:false,daily:[2965,4070,7411,4299,3825,2598,697,5645,1675]},
-  {r:19,name:"نورة المبارك",total:32704,avg:3634,trend:-57.6,pts:0,bonus:false,daily:[15119,3536,725,1014,2555,1535,924,5217,2079]},
-  {r:20,name:"نايف",total:32325,avg:3592,trend:-85.7,pts:0,bonus:false,daily:[4708,12927,6728,2102,1905,468,157,1268,2062]},
-  {r:21,name:"أنوار فهد",total:31121,avg:3458,trend:-9.0,pts:0,bonus:false,daily:[318,5206,4216,5486,4261,2768,4324,2888,1654]},
-  {r:22,name:"أحمد الخميس",total:28098,avg:3122,trend:-74.4,pts:0,bonus:false,daily:[3089,3286,10115,1794,1151,4440,2865,1358,0]},
-  {r:23,name:"نورة الثنيان",total:24626,avg:2736,trend:141.3,pts:0,bonus:false,daily:[306,629,4052,3862,717,3024,7632,2911,1493]},
-  {r:24,name:"قماشة",total:21691,avg:2410,trend:41.4,pts:0,bonus:false,daily:[494,1214,3824,2485,3306,2547,3031,2393,2397]},
-  {r:25,name:"أنوود",total:15594,avg:1733,trend:55.8,pts:0,bonus:false,daily:[708,1101,1764,2872,1978,1605,508,2156,2902]},
-  {r:26,name:"وضحاء خميس",total:14555,avg:1617,trend:14.1,pts:0,bonus:false,daily:[1399,3178,949,594,1589,542,1534,1359,3411]}
-];
-
-function getAvatar(avg) {
-  if (avg >= 15000) return "⚡";
-  if (avg >= 12000) return "🐆";
-  if (avg >= 10000) return "🐎";
-  if (avg >= 8000) return "🐕";
-  if (avg >= 6000) return "🐇";
-  if (avg >= 4000) return "🐈";
-  if (avg >= 3000) return "🦔";
-  if (avg >= 2000) return "🐌";
-  return "🐢";
-}
-
-function toArabicNum(n) {
-  return n.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
-}
-
-const maxTotal = data[0].total;
-const tbody = document.getElementById("tbody");
-
-data.forEach(p => {
-  const emoji = getAvatar(p.avg);
-  const maxD = Math.max(...p.daily);
-  const sparkHtml = p.daily.map(d => {
-    const h = Math.max(2, Math.round((d / maxD) * 22));
-    return `<div class="spark-bar" style="height:${h}px;"></div>`;
-  }).join("");
-
-  const trendIcon = p.trend > 10 ? "▲" : p.trend < -10 ? "▼" : "◆";
-  const trendClass = p.trend > 10 ? "trend-up" : p.trend < -10 ? "trend-down" : "trend-flat";
-  const rankClass = p.r <= 3 ? `top${p.r}` : "";
-
-  const row = document.createElement("tr");
-  row.innerHTML = `
-    <td class="rank-cell ${rankClass}">${toArabicNum(p.r)}</td>
-    <td class="avatar-cell">${emoji}</td>
-    <td class="name-cell">${p.name}${p.bonus ? '<span class="bonus-badge">٧٠ألف+</span>' : ''}</td>
-    <td class="steps-cell">${toArabicNum(p.total.toLocaleString())}</td>
-    <td class="avg-cell">${toArabicNum(p.avg.toLocaleString())}/يوم<br><div class="sparkline-container">${sparkHtml}</div></td>
-    <td class="trend-cell ${trendClass}">${trendIcon} ${toArabicNum(Math.abs(p.trend).toFixed(1))}%</td>
-    <td><span class="pts-pill pts-${Math.min(p.pts, 4)}">${toArabicNum(p.pts)}</span></td>
-  `;
-  tbody.appendChild(row);
-});
-
-const awards = [
-  {icon:"🔥",title:"أكثر خطوات في يوم",name:"باسم خشرم",detail:"٢٢,١٤٩ خطوة في ٣١ مارس"},
-  {icon:"🚀",title:"صاعد محتمل",name:"نورة الثنيان",detail:"ارتفاع ١٤١٪ في المعدل"},
-  {icon:"🎯",title:"الأكثر ثباتاً",name:"وصايف الخشرم",detail:"أقل تذبذب يومي"},
-  {icon:"💪",title:"محطم الأهداف",name:"لينا خشرم",detail:"٢٠٣٪ من هدفها اليومي"},
-  {icon:"🌟",title:"محارب نهاية الأسبوع",name:"غلا",detail:"٢٠,٨٢١ خطوة في أول يوم"},
-  {icon:"📈",title:"متألق متأخر",name:"وضحاء المبارك",detail:"أفضل يوم كان آخر يوم"}
-];
-
-const awardsEl = document.getElementById("awards");
-awards.forEach(a => {
-  const card = document.createElement("div");
-  card.className = "award-card";
-  card.innerHTML = `
-    <div class="award-icon">${a.icon}</div>
-    <div>
-      <div class="award-title">${a.title}</div>
-      <div class="award-name">${a.name}</div>
-      <div class="award-detail">${a.detail}</div>
-    </div>
-  `;
-  awardsEl.appendChild(card);
-});
+const data=[{r:1,n:"باسم خشرم",w1:151937,w2:78516,gt:230453,w1p:4,w2p:3,tp:7,w2a:11216,w2d:[13036,5343,13344,9659,11488,4366,21280],tr:17.1,b2:true,rc:-1},{r:2,n:"وصايف الخشرم",w1:102257,w2:80550,gt:182807,w1p:2,w2p:4,tp:6,w2a:11507,w2d:[10148,10513,11063,10791,10208,14593,13234],tr:19.9,b2:true,rc:2},{r:3,n:"بروك النزهان",w1:100535,w2:73052,gt:173587,w1p:1,w2p:2,tp:3,w2a:10436,w2d:[18160,12751,13578,10790,1842,4894,11037],tr:-60.1,b2:true,rc:1},{r:4,n:"هديل عبدالله",w1:108590,w2:51999,gt:160589,w1p:3,w2p:0,tp:3,w2a:7428,w2d:[5139,16299,7263,5539,3290,11031,3438],tr:-38.1,b2:false,rc:-4},{r:5,n:"لينا خشرم",w1:91335,w2:61093,gt:152428,w1p:1,w2p:0,tp:1,w2a:8727,w2d:[7328,5486,7266,16759,6219,3935,14100],tr:20.8,b2:false,rc:0},{r:6,n:"لولو المبارك",w1:80964,w2:65350,gt:146314,w1p:1,w2p:0,tp:1,w2a:9335,w2d:[10472,8211,4573,11917,11914,12257,6006],tr:29.8,b2:false,rc:3},{r:7,n:"عبدالعزيز الخميس",w1:88198,w2:35055,gt:123253,w1p:1,w2p:0,tp:1,w2a:5007,w2d:[11213,4889,5938,2521,3109,3390,3995],tr:-52.4,b2:false,rc:-5},{r:8,n:"عبدالإله",w1:59982,w2:41869,gt:101851,w1p:0,w2p:0,tp:0,w2a:5981,w2d:[6353,6228,7503,5945,5597,4766,5477],tr:-21.1,b2:false,rc:2},{r:9,n:"حنان المبارك",w1:67870,w2:30939,gt:98809,w1p:0,w2p:0,tp:0,w2a:4419,w2d:[4800,4198,1388,3308,2412,6193,8640],tr:66.0,b2:false,rc:-5},{r:10,n:"غلا",w1:59248,w2:30152,gt:89400,w1p:0,w2p:0,tp:0,w2a:4307,w2d:[8155,4005,3921,4533,1600,5492,2446],tr:-40.7,b2:false,rc:-4},{r:11,n:"متعب سعد",w1:52365,w2:35916,gt:88281,w1p:0,w2p:0,tp:0,w2a:5130,w2d:[3988,5377,4735,6061,7662,5110,2983],tr:11.7,b2:false,rc:2},{r:12,n:"سلاف ماهر",w1:43366,w2:40708,gt:84074,w1p:0,w2p:0,tp:0,w2a:5815,w2d:[7726,4487,4641,6537,3539,6641,7137],tr:2.7,b2:false,rc:6},{r:13,n:"المهاء المبارك",w1:57375,w2:24957,gt:82332,w1p:0,w2p:0,tp:0,w2a:3565,w2d:[10530,5288,1788,2703,843,1093,2712],tr:-73.6,b2:false,rc:-7},{r:14,n:"فوزية الكاميس",w1:40920,w2:31635,gt:72555,w1p:0,w2p:0,tp:0,w2a:4519,w2d:[5358,5207,3926,3932,4912,4832,3468],tr:-8.8,b2:false,rc:3},{r:15,n:"وضحاء المبارك",w1:44133,w2:19417,gt:63550,w1p:0,w2p:0,tp:0,w2a:2773,w2d:[4739,2217,2661,1514,2365,3282,2639],tr:-13.8,b2:false,rc:-7},{r:16,n:"أنوار فهد",w1:31121,w2:29042,gt:60163,w1p:0,w2p:0,tp:0,w2a:4148,w2d:[249,6522,6455,6124,4441,460,4791],tr:-26.7,b2:false,rc:6},{r:17,n:"أحمد الخميس",w1:28098,w2:27265,gt:55363,w1p:0,w2p:0,tp:0,w2a:3895,w2d:[4197,3212,4828,4400,4972,4098,1558],tr:-13.1,b2:false,rc:5},{r:18,n:"أنوود",w1:15594,w2:38816,gt:54410,w1p:0,w2p:0,tp:0,w2a:5545,w2d:[1469,8402,5565,7447,3644,5493,6796],tr:3.2,b2:false,rc:16},{r:19,n:"وفاء حسن",w1:39411,w2:13519,gt:52930,w1p:0,w2p:0,tp:0,w2a:1931,w2d:[5784,2067,1289,1057,929,754,1639],tr:-63.7,b2:false,rc:-9},{r:20,n:"منال م.ع",w1:33793,w2:18372,gt:52165,w1p:0,w2p:0,tp:0,w2a:2624,w2d:[3206,3836,3097,3506,1783,1608,1336],tr:-53.4,b2:false,rc:-5},{r:21,n:"عزيزة حسين",w1:33185,w2:16969,gt:50154,w1p:0,w2p:0,tp:0,w2a:2424,w2d:[4036,1892,3714,2420,943,2542,1422],tr:-49.1,b2:false,rc:-5},{r:22,n:"نايف",w1:32325,w2:12410,gt:44735,w1p:0,w2p:0,tp:0,w2a:4136,w2d:[5506,0,0,1133,0,5771,0],tr:4.8,b2:false,rc:-6},{r:23,n:"نورة المبارك",w1:32704,w2:11741,gt:44445,w1p:0,w2p:0,tp:0,w2a:1677,w2d:[2506,2277,930,1091,1549,1211,2177],tr:-13.6,b2:false,rc:-8},{r:24,n:"وضحاء خميس",w1:14555,w2:27986,gt:42541,w1p:0,w2p:0,tp:0,w2a:3998,w2d:[9648,4292,4059,3696,1062,506,4723],tr:-65.0,b2:false,rc:10},{r:25,n:"قماشة",w1:21691,w2:19470,gt:41161,w1p:0,w2p:0,tp:0,w2a:2781,w2d:[2277,5050,2988,3067,2689,1911,1488],tr:-41.0,b2:false,rc:5},{r:26,n:"نورة الثنيان",w1:24626,w2:16452,gt:41078,w1p:0,w2p:0,tp:0,w2a:2350,w2d:[373,702,239,6303,5475,2257,1103],tr:572.4,b2:false,rc:-1},{r:27,n:"شذا",w1:0,w2:18591,gt:18591,w1p:0,w2p:0,tp:0,w2a:2655,w2d:[2656,1134,1730,1722,2576,6801,1972],tr:105.6,b2:false,rc:0}];
+function toAr(n){return n.toString().replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d])}
+function getAv(a){if(a>=15000)return"⚡";if(a>=12000)return"🐆";if(a>=10000)return"🐎";if(a>=8000)return"🐕";if(a>=6000)return"🐇";if(a>=4000)return"🐈";if(a>=3000)return"🦔";if(a>=2000)return"🐌";return"🐢"}
+function pCls(p){if(p>=7)return"pg";if(p>=5)return"ps";if(p>=3)return"pb";if(p>=1)return"pt";return"pz"}
+const tbody=document.getElementById("tbody");
+data.forEach(p=>{const em=getAv(p.w2a);const mx=Math.max(...p.w2d);const spk=p.w2d.map(d=>{const h=Math.max(2,Math.round((d/mx)*18));return`<div class="spk-b" style="height:${h}px"></div>`}).join("");const ti=p.tr>10?"▲":p.tr<-10?"▼":"◆";const tc=p.tr>10?"tu":p.tr<-10?"td":"tf";const rc=p.rc>0?`<span class="chu" style="font-size:11px">▲${toAr(p.rc)}</span>`:p.rc<0?`<span class="chd" style="font-size:11px">▼${toAr(Math.abs(p.rc))}</span>`:``;const rkc=p.r<=3?`t${p.r}`:"";const b2=p.b2?'<span class="bn">٧٠ألف+</span>':"";
+const row=document.createElement("tr");row.innerHTML=`<td class="rk ${rkc}">${toAr(p.r)}</td><td class="av">${em}</td><td class="nm">${p.n} ${b2} ${rc}</td><td style="font-variant-numeric:tabular-nums;font-size:12px;color:var(--t2)">${toAr(p.w1.toLocaleString())}</td><td style="font-variant-numeric:tabular-nums;font-weight:600">${toAr(p.w2.toLocaleString())}<br><span class="spk">${spk}</span></td><td style="font-variant-numeric:tabular-nums;font-weight:600">${toAr(p.gt.toLocaleString())}</td><td class="${tc}" style="font-size:12px">${ti} ${toAr(Math.abs(p.tr).toFixed(1))}٪</td><td><span class="pts-p ${pCls(p.tp)}">${toAr(p.tp)}</span></td>`;tbody.appendChild(row)});
+const awards=[{i:"🔥",t:"أكثر خطوات في يوم",n:"باسم خشرم",d:"٢١,٢٨٠ خطوة"},{i:"🎯",t:"الأكثر ثباتاً",n:"عبدالإله",d:"أقل تذبذب يومي"},{i:"🚀",t:"صاعد محتمل",n:"نورة الثنيان",d:"ارتفاع ٥٧٢٪"},{i:"💪",t:"محطم الأهداف",n:"لينا خشرم",d:"١٧٤٪ من هدفها"},{i:"⬆️",t:"أكبر قفزة",n:"أنوود",d:"صعدت ١٦ مركز"},{i:"📈",t:"الأكثر تحسناً",n:"أنوود",d:"ارتفاع ١٤٩٪ عن أسبوع ١"}];
+const awEl=document.getElementById("awards");awards.forEach(a=>{const c=document.createElement("div");c.className="aw";c.innerHTML=`<div class="aw-i">${a.i}</div><div><div class="aw-t">${a.t}</div><div class="aw-n">${a.n}</div><div class="aw-d">${a.d}</div></div>`;awEl.appendChild(c)});
 </script>
-
 </body>
 </html>
